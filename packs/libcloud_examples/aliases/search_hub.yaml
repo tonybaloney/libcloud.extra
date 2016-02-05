@@ -1,0 +1,17 @@
+---
+name: "search_hub"
+description: "Search the docker hub for images"
+action_ref: "libcloud_examples.docker_hub_search"
+formats:
+  - "search hub {{search}}"
+ack:
+  append_url: false
+  format: "Let me search.."
+result:
+  format: |
+    found some images for you: {~}
+    {% for collection in execution.result.result %}
+    {% for container in collection %}
+    {{ loop.index }}. *{{ container.name }}*: {{ container.version }}
+    {% endfor %}
+    {% endfor %}
