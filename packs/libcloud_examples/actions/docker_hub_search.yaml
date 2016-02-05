@@ -1,0 +1,10 @@
+---
+name: docker_hub_search
+runner_type: python-script
+description: Query the docker hub
+enabled: true
+entry_point: docker_hub_search.py
+parameters:
+  search:
+    type: string
+    required: true

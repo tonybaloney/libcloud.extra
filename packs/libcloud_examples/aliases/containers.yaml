@@ -1,0 +1,19 @@
+---
+name: "list_containers"
+description: "List containers"
+action_ref: "libcloud.list_containers"
+formats:
+  - "containers {{credentials}}"
+ack:
+  append_url: false
+  format: "Let me find containers in that cloud for you "
+result:
+  format: |
+    {% if execution.result.result|length %}
+    found some containers for you: {~}
+    {% for server in execution.result.result %}
+    {{ loop.index }}. *{{ server.name }}*: is {{ server.state }}
+    {% endfor %}
+    {% else %}
+    couldn't find anything, sorry!
+    {% endif %}

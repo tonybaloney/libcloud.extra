@@ -18,10 +18,16 @@ What is in this pack?
 
 `deploy_to` - Deploy an image to a particular cloud, choose the cloud as a parameters
 `example_parallel_compute` - A mistral workflow that deploys 2 VMs, adds A records to a DNS zone and adds them to a load balancer
+![](https://raw.githubusercontent.com/tonybaloney/libcloud.extra/master/screenshots/example_parallel_compute.PNG)
 `list_all_vms` - Return a merged list of all the nodes across all configured clouds
+![](https://raw.githubusercontent.com/tonybaloney/libcloud.extra/master/screenshots/list_all_vms.PNG
+`example_scale_event` - Scale out a cluster by a number of nodes and add them to a load balancer
+![](https://raw.githubusercontent.com/tonybaloney/libcloud.extra/master/screenshots/example_scale_event.PNG)
 `list_clouds` - List the available clouds for a given type in the libcloud pack
 
 ## Chatops aliases
+
+![Alias example](https://raw.githubusercontent.com/tonybaloney/libcloud.extra/master/screenshots/alias_clouds.PNG)
 
 `!allservers {{search=all}}` - Get a list of all the servers (optional filter)
 `!clouds {{type=all}}` - List all the clouds
