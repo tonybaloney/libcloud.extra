@@ -1,7 +1,7 @@
 ---
 name: "deploy_to"
 description: "Deploy a server"
-action_ref: "multicloud_examples.deploy_to"
+action_ref: "libcloud_examples.deploy_to"
 formats:
   - "deploy_to {{cloud}} {{name}} {{image}} {{size}}"
 ack:

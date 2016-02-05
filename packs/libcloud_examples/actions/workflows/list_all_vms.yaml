@@ -1,7 +1,7 @@
 ---
 version: '2.0'
 
-multicloud_examples.whereis:
+multicloud_examples.list_all_vms:
     type: direct
     input:
         - search
@@ -14,7 +14,7 @@ multicloud_examples.whereis:
           input:
             type: "compute"
           publish:
-            clouds: <% task(list_clouds).result.result.keys() %> 
+            clouds: <% task(list_clouds).result.result.keys() %>
           on-success:
                 - list_vms
         list_vms:
@@ -25,4 +25,3 @@ multicloud_examples.whereis:
             credentials: <% $.item %>
           publish:
             servers: <% $.list_vms.result %>
-

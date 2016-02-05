@@ -1,9 +1,11 @@
 ---
 version: '2.0'
 
-multicloud_examples.example_scale_event:
+libcloud_examples.example_scale_event:
   input:
-    - cloud
+    - credentials
+    - dns_credentials
+    - lb_credentials
     - balancer_id
     - zone
     - image
@@ -20,7 +22,7 @@ multicloud_examples.example_scale_event:
         - create_a_record: <% $.zone not 'none' %>
         - add_to_lb_node: <% $.balancer_id not 'none' %>
       input:
-        credentials: <% $.cloud %>
+        credentials: <% $.credentials %>
         name: <% $.name %>
         size_name: <% $.size %>
         image_name: <% $.image %>
@@ -30,7 +32,7 @@ multicloud_examples.example_scale_event:
       # [105, 128]
       action: libcloud.create_dns_record
       input:
-        credentials: <% $.cloud %>
+        credentials: <% $.dns_credentials %>
         type: 'A'
         data: <% $.node.public_ips[0] %>
         name: <% $.node.name %>
@@ -38,12 +40,12 @@ multicloud_examples.example_scale_event:
       on-success:
         - add_to_lb_node: <% $.balancer_id not 'none' %>
     add_to_lb_node:
-      # [105, 230]
+       # [105, 230]
       action: libcloud.balancer_attach_member
       on-success:
         - list_lb_members
       input:
-        credentials: <% $.cloud %>
+        credentials: <% $.lb_credentials %>
         balancer_id: <% $.balancer_id %>
         member_ip: <% $.node.private_ips[0] %>
         member_port: 80
@@ -51,5 +53,5 @@ multicloud_examples.example_scale_event:
       # [105, 332]
       action: libcloud.balancer_list_members
       input:
-        credentials: <% $.cloud %>
+        credentials: <% $.lb_credentials %>
         balancer_id: <% $.balancer.id %>

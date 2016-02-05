@@ -1,0 +1,10 @@
+---
+name: list_all_vms
+runner_type: mistral-v2
+description: List VMs across all configured clouds
+enabled: true
+entry_point: workflows/list_all_vms.yaml
+parameters:
+  search:
+    type: string
+    required: true

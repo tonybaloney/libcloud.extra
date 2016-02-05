@@ -1,9 +1,8 @@
 ---
-name: "whereis"
-description: "Find a server"
-action_ref: "multicloud_examples.whereis"
+name: "list_all_vms"
+description: "Find all servers across all clouds"
+action_ref: "libcloud_examples.list_all_vms"
 formats:
-  - "whereis {{search}}"
   - "allservers {{search=all}}"
 ack:
   append_url: false

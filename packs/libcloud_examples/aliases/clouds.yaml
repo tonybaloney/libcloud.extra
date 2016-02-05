@@ -1,7 +1,7 @@
 ---
 name: "clouds"
 description: "List my clouds"
-action_ref: "multicloud.list_clouds"
+action_ref: "libcloud_examples.list_clouds"
 formats:
   - "clouds {{type=all}}"
 ack:

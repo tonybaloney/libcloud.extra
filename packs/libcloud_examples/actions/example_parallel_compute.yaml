@@ -21,9 +21,12 @@ parameters:
   domain:
     type: string
     description: The domain to add the records to
-  cloud:
+  lb_credentials:
     type: string
-    description: The name of the cloud to use
-  dns_cloud:
+    description: The name of the load balancer cloud to use
+  dns_credentials:
     type: string
     description: The name of the DNS cloud to use
+  credentials:
+    type: string
+    description: The cloud to deploy

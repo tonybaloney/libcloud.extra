@@ -5,9 +5,15 @@ description: Deploy compute node because of a scale event
 enabled: true
 entry_point: workflows/example_scale_event.yaml
 parameters:
-  cloud:
+  credentials:
     type: string
     description: the cloud to scale up
+  dns_credentials:
+    type: string
+    description: the DNS cloud provider
+  lb_credentials:
+    type: string
+    description: the load balancer cloud provider
   zone:
     default: 'none'
     description: Zone to add the records too

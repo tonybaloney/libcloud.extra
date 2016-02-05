@@ -1,15 +1,16 @@
 ---
 version: '2.0'
 
-multicloud_examples.example_parallel_compute:
+libcloud_examples.example_parallel_compute:
   input:
-    - cloud
-    - dns_cloud
+    - lb_credentials
+    - dns_credentials
     - balancer_id
     - domain
     - image
     - name
     - size
+    - credentials
   tasks:
     create_node_1:
       # [365, 26]
@@ -17,7 +18,7 @@ multicloud_examples.example_parallel_compute:
       on-success:
         - create_a_record
       input:
-        credentials: 'openstack'
+        credentials: <% $.credentials %>
         name: <% $.name %>
         size_name: <% $.size %>
         image_name: <% $.image %>
@@ -29,7 +30,7 @@ multicloud_examples.example_parallel_compute:
       on-success:
         - create_a_record2
       input:
-        credentials: <% $.cloud %>
+        credentials: <% $.credentials %>
         name: <% $.name %>
         size_name: <% $.size %>
         image_name: <% $.image %>
@@ -39,7 +40,7 @@ multicloud_examples.example_parallel_compute:
       # [365, 128]
       action: libcloud.create_dns_record
       input:
-        credentials: <% $.dns_cloud %>
+        credentials: <% $.dns_credentials %>
         domain: <% $.domain %>
         type: 'A'
         data: <% $.node1.public_ips[0] %>
@@ -50,7 +51,7 @@ multicloud_examples.example_parallel_compute:
       # [105, 128]
       action: libcloud.create_dns_record
       input:
-        credentials: <% $.dns_cloud %>
+        credentials: <% $.dns_credentials %>
         domain: <% $.domain %>
         type: 'A'
         data: <% $.node2.public_ips[0] %>
@@ -63,7 +64,7 @@ multicloud_examples.example_parallel_compute:
       on-success:
         - list_lb_members
       input:
-        credentials: <% $.cloud %>
+        credentials: <% $.lb_credentials %>
         balancer_id: <% $.balancer_id %>
         member_ip: <% $.node1.private_ips[0] %>
         member_port: 80
@@ -71,7 +72,7 @@ multicloud_examples.example_parallel_compute:
       # [105, 230]
       action: libcloud.balancer_attach_member
       input:
-        credentials: <% $.cloud %>
+        credentials: <% $.lb_credentials %>
         balancer_id: <% $.balancer_id %>
         member_ip: <% $.node2.private_ips[0] %>
         member_port: 80
@@ -81,5 +82,5 @@ multicloud_examples.example_parallel_compute:
       # [235, 332]
       action: libcloud.balancer_list_members
       input:
-        credentials: <% $.cloud %>
+        credentials: <% $.lb_credentials %>
         balancer_id: <% $.balancer.id %>
