@@ -1,8 +1,7 @@
 Libcloud examples for StackStorm
 =====
-![multi-cloud](http://www.cathyfamily.com/media/48831/peanuts.png)
 
-What is multi-cloud?
+What is libcloud?
 ----
 The ability to orchestrate against multiple clouds, public, private, hybrid.
 
@@ -35,3 +34,6 @@ What is in this pack?
 `!servers {{credentials}}` - List servers in a cloud
 `!containers {{credentials}}` - List containers in a cloud
 ![](https://raw.githubusercontent.com/tonybaloney/libcloud.extra/master/screenshots/list_containers.PNG)
+`!search hub {{search}}` - Search the docker hub
+![](https://raw.githubusercontent.com/tonybaloney/libcloud.extra/master/screenshots/search_hub.PNG)
+`!"create container {{credentials}} {{name}} {{repository_name}} {{tag=latest}}"` - Create a container on a cloud
