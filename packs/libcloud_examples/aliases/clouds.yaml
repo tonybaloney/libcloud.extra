@@ -1,0 +1,15 @@
+---
+name: "clouds"
+description: "List my clouds"
+action_ref: "multicloud.list_clouds"
+formats:
+  - "clouds {{type=all}}"
+ack:
+  append_url: false
+  format: "Checking which clouds you have configured"
+result:
+  format: |
+    found some clouds for you: {~}
+    {% for name, cloud in execution.result.result.iteritems() %}
+    {{ loop.index }}. *{{name}} - {{ cloud.provider }}*: {{ cloud.region }}
+    {% endfor %}

@@ -1,0 +1,18 @@
+---
+name: "whereis"
+description: "Find a server"
+action_ref: "multicloud_examples.whereis"
+formats:
+  - "whereis {{search}}"
+  - "allservers {{search=all}}"
+ack:
+  append_url: false
+  format: "Let me search across your clouds for those servers"
+result:
+  format: |
+    found some servers for you: {~}
+    {% for collection in execution.result.servers %}
+    {% for server in collection %}
+    {{ loop.index }}. *{{ server.name }}*: {{ server.private_ips }}
+    {% endfor %}
+    {% endfor %}

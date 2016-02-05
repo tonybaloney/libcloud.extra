@@ -1,0 +1,11 @@
+---
+name: list_clouds
+runner_type: python-script
+description: List the configured clouds in libcloud pack
+enabled: true
+entry_point: list_clouds.py
+parameters:
+  type:
+    type: string
+    default: all
+    description: The type of cloud to return, e.g. compute, dns, storage

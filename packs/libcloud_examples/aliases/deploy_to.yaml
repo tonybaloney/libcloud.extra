@@ -1,0 +1,13 @@
+---
+name: "deploy_to"
+description: "Deploy a server"
+action_ref: "multicloud_examples.deploy_to"
+formats:
+  - "deploy_to {{cloud}} {{name}} {{image}} {{size}}"
+ack:
+  append_url: false
+  format: "OK! Let me go out and provision that server for you, it'll take a minute or 10."
+result:
+  format: |
+    Created your new server: {~}
+    *{{ execution.result.server.name }}*: with IPs {{ execution.result.server.private_ips }} and public {{ execution.result.server.public_ips }}

@@ -1,0 +1,22 @@
+---
+name: example_parallel_storage
+runner_type: mistral-v2
+description: Deploy some new CDN content to a node
+enabled: true
+entry_point: workflows/example_parallel_storage.yaml
+parameters:
+  file_path:
+    type: string
+    description: The file name content
+  container:
+    type: string
+    description: The name of the container with the file content
+  image:
+    type: string
+    description: The name of the image to deploy
+  name:
+    type: string
+    description: The name of the server (+1,2)
+  size:
+    type: string
+    description: The size name

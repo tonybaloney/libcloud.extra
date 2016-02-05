@@ -1,0 +1,10 @@
+---
+name: whereis
+runner_type: mistral-v2
+description: Which Cloud did I leave my VM in?
+enabled: true
+entry_point: workflows/whereis.yaml
+parameters:
+  search:
+    type: string
+    required: true

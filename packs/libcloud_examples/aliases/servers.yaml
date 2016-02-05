@@ -1,0 +1,19 @@
+---
+name: "servers"
+description: "List servers"
+action_ref: "libcloud.list_vms"
+formats:
+  - "servers {{credentials}}"
+ack:
+  append_url: false
+  format: "Let me find servers in that cloud for you "
+result:
+  format: |
+    {% if execution.result.result|length %}
+    found some servers for you: {~}
+    {% for server in execution.result.result %}
+    {{ loop.index }}. *{{ server.name }}*: private {{ server.private_ips }} and public {{ server.public_ips }}
+    {% endfor %}
+    {% else %}
+    couldn't find anything, sorry!
+    {% endif %}

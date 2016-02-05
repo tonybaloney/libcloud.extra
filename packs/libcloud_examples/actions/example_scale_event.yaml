@@ -1,0 +1,37 @@
+---
+name: example_scale_event
+runner_type: mistral-v2
+description: Deploy compute node because of a scale event
+enabled: true
+entry_point: workflows/example_scale_event.yaml
+parameters:
+  cloud:
+    type: string
+    description: the cloud to scale up
+  zone:
+    default: 'none'
+    description: Zone to add the records too
+    type: string
+  balancer_id:
+    type: string
+    required: false
+    default: 'none'
+    description: The load balancer to put this into
+  image:
+    type: string
+    default: 'RedHat 6 64-bit 4 CPU'
+    description: The name of the image to deploy
+  name:
+    type: string
+    default: 'my-web-farm'
+    description: The name of the server (+1,2)
+  size:
+    type: string
+    default: 'default'
+    description: The size name
+  number:
+    type: integer
+    description: The number to scale up by
+  domain:
+    type: string
+    required: true

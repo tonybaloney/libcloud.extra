@@ -1,0 +1,20 @@
+---
+name: deploy_to
+runner_type: mistral-v2
+description: Deploy an image to a location
+enabled: true
+entry_point: workflows/deploy_to.yaml
+parameters:
+  cloud:
+    type: string
+    required: true
+  name:
+    type: string
+    required: true
+  image:
+    type: string
+    required: true
+  size:
+    type: string
+    required: true
+  

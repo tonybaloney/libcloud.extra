@@ -1,0 +1,28 @@
+---
+version: '2.0'
+
+multicloud_examples.whereis:
+    type: direct
+    input:
+        - search
+    output:
+        servers: <% $.servers %>
+    tasks:
+        list_clouds:
+          # [213, 89]
+          action: multicloud.list_clouds
+          input:
+            type: "compute"
+          publish:
+            clouds: <% task(list_clouds).result.result.keys() %> 
+          on-success:
+                - list_vms
+        list_vms:
+          # [214, 308]
+          with-items: item in <% $.clouds %>
+          action: libcloud.list_vms
+          input:
+            credentials: <% $.item %>
+          publish:
+            servers: <% $.list_vms.result %>
+

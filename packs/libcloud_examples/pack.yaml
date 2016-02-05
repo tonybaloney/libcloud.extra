@@ -1,0 +1,10 @@
+---
+name : libcloud_examples
+description : st2 content pack containing libcloud example workflows
+keywords:
+  - cloud
+  - hybrid
+  - libcloud
+version : 0.1
+author : Anthony Shaw
+email : anthonyshaw@apache.org

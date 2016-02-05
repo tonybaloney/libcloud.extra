@@ -1,0 +1,85 @@
+---
+version: '2.0'
+
+multicloud_examples.example_parallel_compute:
+  input:
+    - cloud
+    - dns_cloud
+    - balancer_id
+    - domain
+    - image
+    - name
+    - size
+  tasks:
+    create_node_1:
+      # [365, 26]
+      action: libcloud.create_vm
+      on-success:
+        - create_a_record
+      input:
+        credentials: 'openstack'
+        name: <% $.name %>
+        size_name: <% $.size %>
+        image_name: <% $.image %>
+      publish:
+        node1: <% $.create_node_1.result %>
+    create_node_2:
+      # [105, 26]
+      action: libcloud.create_vm
+      on-success:
+        - create_a_record2
+      input:
+        credentials: <% $.cloud %>
+        name: <% $.name %>
+        size_name: <% $.size %>
+        image_name: <% $.image %>
+      publish:
+        node2: <% $.create_node_2.result %>
+    create_a_record:
+      # [365, 128]
+      action: libcloud.create_dns_record
+      input:
+        credentials: <% $.dns_cloud %>
+        domain: <% $.domain %>
+        type: 'A'
+        data: <% $.node1.public_ips[0] %>
+        name: <% $.node1.name %>
+      on-success:
+        - add_to_lb_node1
+    create_a_record2:
+      # [105, 128]
+      action: libcloud.create_dns_record
+      input:
+        credentials: <% $.dns_cloud %>
+        domain: <% $.domain %>
+        type: 'A'
+        data: <% $.node2.public_ips[0] %>
+        name: <% $.node2.name %>
+      on-success:
+        - add_to_lb_node2
+    add_to_lb_node1:
+      # [365, 230]
+      action: libcloud.balancer_attach_member
+      on-success:
+        - list_lb_members
+      input:
+        credentials: <% $.cloud %>
+        balancer_id: <% $.balancer_id %>
+        member_ip: <% $.node1.private_ips[0] %>
+        member_port: 80
+    add_to_lb_node2:
+      # [105, 230]
+      action: libcloud.balancer_attach_member
+      input:
+        credentials: <% $.cloud %>
+        balancer_id: <% $.balancer_id %>
+        member_ip: <% $.node2.private_ips[0] %>
+        member_port: 80
+      on-success:
+        - list_lb_members
+    list_lb_members:
+      # [235, 332]
+      action: libcloud.balancer_list_members
+      input:
+        credentials: <% $.cloud %>
+        balancer_id: <% $.balancer.id %>
