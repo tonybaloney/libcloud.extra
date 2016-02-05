@@ -10,6 +10,6 @@ ack:
 result:
   format: |
     found some images for you: {~}
-    {% for image in execution.result %}
+    {% for image in execution.result.result %}
     *{{ image.name }}*: {{ image.version }}
     {% endfor %}
