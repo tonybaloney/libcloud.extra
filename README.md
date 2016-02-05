@@ -33,3 +33,5 @@ What is in this pack?
 `!clouds {{type=all}}` - List all the clouds
 `!deploy_to {{cloud}} {{name}} {{image}} {{size}}` - Deploy a node to a cloud
 `!servers {{credentials}}` - List servers in a cloud
+`!containers {{credentials}}` - List containers in a cloud
+![](https://raw.githubusercontent.com/tonybaloney/libcloud.extra/master/screenshots/list_containers.PNG)

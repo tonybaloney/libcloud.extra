@@ -10,7 +10,7 @@ ack:
 result:
   format: |
     found some images for you: {~}
-    {% for collection in execution.result.result %}
+    {% for collection in execution.result %}
     {% for container in collection %}
     {{ loop.index }}. *{{ container.name }}*: {{ container.version }}
     {% endfor %}
