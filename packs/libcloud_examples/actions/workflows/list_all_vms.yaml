@@ -10,7 +10,7 @@ multicloud_examples.list_all_vms:
     tasks:
         list_clouds:
           # [213, 89]
-          action: multicloud.list_clouds
+          action: libcloud_examples.list_clouds
           input:
             type: "compute"
           publish:
