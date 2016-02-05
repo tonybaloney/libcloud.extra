@@ -1,0 +1,13 @@
+---
+name: "create_container"
+description: "Create container"
+action_ref: "libcloud.deploy_container"
+formats:
+  - "create container {{credentials}} {{name}} {{repository_name}} {{tag=latest}}"
+ack:
+  append_url: false
+  format: "Let me create that container for you "
+result:
+  format: |
+    Created your new container: {~}
+    *{{ execution.result.result.name }}*: ID {{ execution.result.result.id }}
